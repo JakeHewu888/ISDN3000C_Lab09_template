@@ -2,7 +2,7 @@
 
 **Question 1:** What is the purpose of the `@app.route('/health')` decorator in the code?
 
-**Answer:**
+**Answer:** The purpose is to check whether the server is working well(keep running), which refers as 'Health' or not. 
 
 
 
@@ -10,7 +10,7 @@
 ----------------
 **Question 2:** In Jinja2, what is the difference between `{{ my_variable }}` and `{% for item in my_list %}`?
 
-**Answer:**
+**Answer:**{% ... %} for Statements， {{ ... }} for Expressions to print to the template output(Variable names)
 
 
 
