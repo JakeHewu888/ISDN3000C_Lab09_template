@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Let's add some minimal styling -->
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 1em; }
+        h1 { color: #333; }
+    </style>
+    <title>{{ page_title }}</title>
+</head>
+<!-- ... (head section remains the same) ... -->
+ <body>
+    <h1>Welcome to the Guestbook!</h1>
+    <p>Here are the favorite movies:</p>
+    
+    <ol>
+    {% for m in movies %}
+        <li>{{ m }}</li>
+    {% else %}
+        <li>No movies yet!</li>
+    {% endfor %}
+    </ol>
+
+</body>
+</html>

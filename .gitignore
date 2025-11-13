@@ -1,0 +1,55 @@
+# -------------------------------
+# Python
+# -------------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.sqlite3
+
+# Virtual environments
+venv/
+FlaskVenv/
+ENV/
+.env/
+*.env
+
+# VSCode
+.vscode/
+
+# Mac system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Byte-compiled files
+*.egg-info/
+.eggs/
+
+# Logs
+*.log
+
+# -------------------------------
+# Flask App specific
+# -------------------------------
+# Do not store local SQLite DB in Git 
+# (only keep schema.sql if needed)
+database.db
+
+# -------------------------------
+# Docker
+# -------------------------------
+# Ignore local build artifacts
+*.tar
+*.pid
+
+# Docker Compose override (if exists)
+docker-compose.override.yml
+
+# -------------------------------
+# Cache / temporary files
+# -------------------------------
+.cache/
+tmp/
+*.tmp

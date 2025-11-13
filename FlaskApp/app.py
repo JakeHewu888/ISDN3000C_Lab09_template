@@ -1,7 +1,8 @@
-import sqlite3
 from flask import Flask, render_template, request, url_for, redirect, jsonify
+import sqlite3
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'ISDN3000Cflash'
 
 # Function to get a database connection
 def get_db_connection():
@@ -16,6 +17,7 @@ def index():
     if request.method == 'POST':
         name = request.form['name']
         message = request.form['message']
+        print('DEBUG POST len(message) =', len(message))
         
         if name and message and len(message) <= 140: # Basic validation
             conn.execute('INSERT INTO messages (name, message) VALUES (?, ?)',
@@ -23,8 +25,8 @@ def index():
             conn.commit()
             conn.close()
             return redirect(url_for('index')) # Redirect to prevent form resubmission
-        elif len(message) > 140:
-
+        else:
+            conn.close()
             return redirect(url_for('index')) # Redirect to prevent form resubmission
 
     # This code runs for a GET request
@@ -37,7 +39,6 @@ def index():
         messages=messages
     )
 
-
 @app.route('/api/messages', methods=['POST'])
 def add_message_api():
     data = request.get_json()
@@ -46,6 +47,12 @@ def add_message_api():
 
     if not name or not message:
         return jsonify({'status': 'error', 'message': 'Name and message are required.'}), 400
+    
+    if len(message) > 140:
+        return jsonify({
+            'status': 'error',
+            'message': 'You can not send more than 140 characters.'
+        }), 400
 
     conn = get_db_connection()
     conn.execute('INSERT INTO messages (name, message) VALUES (?, ?)',
@@ -62,8 +69,14 @@ def health_check():
 
 @app.route('/about')
 def text():
-    return 'This is a simple Flask guestbook application.', 700
+    return 'This is a simple Flask guestbook application.', 200
 
 @app.route('/movie')
 def movie():
-    return 'This is my favorite movies(For tas).'
+    movies = ["Scent of a Woman", "Oppenheimer", "Who Am I"]
+    
+    # Pass variables to the template
+    return render_template(
+        'movies.html', 
+        page_title='Favorite Movie', 
+        movies = movies)
